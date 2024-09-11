@@ -1,0 +1,82 @@
+# Copyright (c) The Amphitheatre Authors. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+api = "0.8"
+
+[buildpack]
+  description = "A Cloud Native Buildpack that provides the Sway Tool Suite"
+  homepage = "https://github.com/amp-buildpacks/sway"
+  id = "amp-buildpacks/sway"
+  keywords = ["Sway"]
+  sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
+  name = "AMP Buildpack for Sway"
+  version = "{{ .version }}"
+
+  [[buildpack.licenses]]
+    type = "Apache-2.0"
+    uri = "https://github.com/amp-buildpacks/sway/blob/main/LICENSE"
+
+[metadata]
+  include-files = ["LICENSE", "README.md", "linux/amd64/bin/build", "linux/amd64/bin/detect", "linux/amd64/bin/main", "linux/arm64/bin/build", "linux/arm64/bin/detect", "linux/arm64/bin/main", "buildpack.toml"]
+  pre-package = "scripts/build.sh"
+
+  [[metadata.configurations]]
+    build = true
+    default = "0.63.5"
+    description = "The Forc version"
+    name = "BP_FORC_VERSION"
+
+  [[metadata.configurations]]
+    build = true
+    default = "amd64"
+    description = "The Forc Platform, support: amd64,arm64"
+    name = "BP_FORC_PLATFORM"
+
+  [[metadata.configurations]]
+    build = true
+    default = "true"
+    description = "Enable the Forc deploy tool"
+    name = "BP_ENABLE_FORC_DEPLOY"
+
+  [[metadata.dependencies]]
+    id = "forc-amd64"
+    name = "Forc AMD64"
+    purl = "pkg:generic/forc@v0.63.5"
+    sha256 = "372d8002055508bb822278fe1cbf74e8765cd4de7e8f56fbc90fb9e73235bf4e"
+    uri = "https://github.com/FuelLabs/sway/releases/download/v0.63.5/forc-binaries-linux_amd64.tar.gz"
+    stacks = ["*"]
+    version = "0.63.5"
+    licenses = [ "GNU" ]
+
+  [[metadata.dependencies]]
+    id = "forc-arm64"
+    name = "Forc ARM64"
+    purl = "pkg:generic/forc@v0.63.5"
+    sha256 = "73e031e1c3fb20ed854fc77e8717bddba56324958c702a1a670edb89270a3e70"
+    uri = "https://github.com/FuelLabs/sway/releases/download/v0.63.5/forc-binaries-linux_arm64.tar.gz"
+    stacks = ["*"]
+    version = "0.63.5"
+    licenses = [ "GNU" ]
+
+
+[[stacks]]
+  id = "*"
+
+[[targets]]
+  arch = "amd64"
+  os = "linux"
+
+[[targets]]
+  arch = "arm64"
+  os = "linux"

@@ -1,0 +1,17 @@
+[[dependencies]]
+id = "forc-amd64"
+name = "Forc AMD64"
+pkg_name = "forc"
+sha256 = "372d8002055508bb822278fe1cbf74e8765cd4de7e8f56fbc90fb9e73235bf4e"
+uri = "https://github.com/FuelLabs/sway/releases/download/v0.63.5/forc-binaries-linux_amd64.tar.gz"
+version = "0.63.5"
+license = "GNU"
+
+[[dependencies]]
+id = "forc-arm64"
+name = "Forc ARM64"
+pkg_name = "forc"
+sha256 = "73e031e1c3fb20ed854fc77e8717bddba56324958c702a1a670edb89270a3e70"
+uri = "https://github.com/FuelLabs/sway/releases/download/v0.63.5/forc-binaries-linux_arm64.tar.gz"
+version = "0.63.5"
+license = "GNU"
