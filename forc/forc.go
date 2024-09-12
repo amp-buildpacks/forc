@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package sway
+package forc
 
 import (
 	"bytes"
@@ -37,7 +37,7 @@ type Forc struct {
 	Executor         effect.Executor
 }
 
-func NewSway(dependency libpak.BuildpackDependency, cache libpak.DependencyCache, configResolver libpak.ConfigurationResolver) Forc {
+func NewForc(dependency libpak.BuildpackDependency, cache libpak.DependencyCache, configResolver libpak.ConfigurationResolver) Forc {
 	contributor := libpak.NewDependencyLayerContributor(dependency, cache, libcnb.LayerTypes{
 		Cache:  true,
 		Launch: true,

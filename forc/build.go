@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package sway
+package forc
 
 import (
 	"fmt"
@@ -33,7 +33,7 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 	pr := libpak.PlanEntryResolver{Plan: context.Plan}
 
 	if _, ok, err := pr.Resolve(PlanEntryForc); err != nil {
-		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve Sway plan entry\n%w", err)
+		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve %s plan entry\n%w", PlanEntryForc, err)
 	} else if ok {
 		cr, err := libpak.NewConfigurationResolver(context.Buildpack, &b.Logger)
 		if err != nil {
@@ -59,14 +59,14 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to find dependency\n%w", err)
 		}
 
-		swayLayer := NewSway(dependency, dc, cr)
-		swayLayer.Logger = b.Logger
+		forcLayer := NewForc(dependency, dc, cr)
+		forcLayer.Logger = b.Logger
 
-		result.Processes, err = swayLayer.BuildProcessTypes(cr, context.Application)
+		result.Processes, err = forcLayer.BuildProcessTypes(cr, context.Application)
 		if err != nil {
 			return libcnb.BuildResult{}, fmt.Errorf("unable to build list of process types\n%w", err)
 		}
-		result.Layers = append(result.Layers, swayLayer)
+		result.Layers = append(result.Layers, forcLayer)
 	}
 
 	return result, nil

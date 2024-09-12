@@ -15,17 +15,17 @@
 api = "0.8"
 
 [buildpack]
-  description = "A Cloud Native Buildpack that provides the Sway Tool Suite"
-  homepage = "https://github.com/amp-buildpacks/sway"
-  id = "amp-buildpacks/sway"
-  keywords = ["Sway"]
+  description = "A Cloud Native Buildpack that provides the Forc Tool Suite"
+  homepage = "https://github.com/amp-buildpacks/forc"
+  id = "amp-buildpacks/forc"
+  keywords = ["Forc"]
   sbom-formats = ["application/vnd.cyclonedx+json", "application/vnd.syft+json"]
-  name = "AMP Buildpack for Sway"
+  name = "AMP Buildpack for Forc"
   version = "{{ .version }}"
 
   [[buildpack.licenses]]
     type = "Apache-2.0"
-    uri = "https://github.com/amp-buildpacks/sway/blob/main/LICENSE"
+    uri = "https://github.com/amp-buildpacks/forc/blob/main/LICENSE"
 
 [metadata]
   include-files = ["LICENSE", "README.md", "linux/amd64/bin/build", "linux/amd64/bin/detect", "linux/amd64/bin/main", "linux/arm64/bin/build", "linux/arm64/bin/detect", "linux/arm64/bin/main", "buildpack.toml"]

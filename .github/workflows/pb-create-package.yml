@@ -173,7 +173,7 @@ jobs:
                     --format "${FORMAT}" $([ -n "$TTL_SH_PUBLISH" ] && [ "$TTL_SH_PUBLISH" = "true" ] && echo "--publish")
                 fi
               env:
-                PACKAGES: ghcr.io/amp-buildpacks/sway
+                PACKAGES: ghcr.io/amp-buildpacks/forc
                 PUBLISH: "true"
                 VERSION: ${{ steps.version.outputs.version }}
                 VERSION_MAJOR: ${{ steps.version.outputs.version-major }}
@@ -203,7 +203,7 @@ jobs:
             - if: ${{ false }}
               uses: docker://ghcr.io/buildpacks/actions/registry/request-add-entry:5.7.2
               with:
-                address: ghcr.io/amp-buildpacks/sway@${{ steps.package.outputs.digest }}
-                id: amp-buildpacks/sway
+                address: ghcr.io/amp-buildpacks/forc@${{ steps.package.outputs.digest }}
+                id: amp-buildpacks/forc
                 token: ${{ secrets.AMP_BUILDPACKS_BOT_GITHUB_TOKEN }}
                 version: ${{ steps.version.outputs.version }}
