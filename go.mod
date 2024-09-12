@@ -1,4 +1,4 @@
-module github.com/amp-buildpacks/sway
+module github.com/amp-buildpacks/forc
 
 go 1.22
 

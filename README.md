@@ -1,12 +1,12 @@
-# `ghcr.io/amp-buildpacks/sway`
+# `ghcr.io/amp-buildpacks/forc`
 
-A Cloud Native Buildpack that provides the Sway Tool Suite
+A Cloud Native Buildpack that provides the Forc Tool Suite
 
 ## Configuration
 
 | Environment Variable      | Description                                                                                                                                                                                                                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$BP_SWAY_VERSION` | Configure the version of Sway to install. It can be a specific version or a wildcard like `1.*`. It defaults to the latest `1.*` version. |
+| `$BP_FORC_VERSION` | Configure the version of Forc to install. It can be a specific version or a wildcard like `1.*`. It defaults to the latest `1.*` version. |
 
 
 ## Usage
@@ -15,17 +15,17 @@ A Cloud Native Buildpack that provides the Sway Tool Suite
 
 ```shell
 pack build <image-name> \
-    --path <sway-samples-path> \
-    --buildpack ghcr.io/amp-buildpacks/sway \
+    --path <forc-samples-path> \
+    --buildpack ghcr.io/amp-buildpacks/forc \
     --builder paketobuildpacks/builder-jammy-base
 ```
 
 For example:
 
 ```shell
-pack build sway-sample \
-    --path ./samples/sway \
-    --buildpack ghcr.io/amp-buildpacks/sway \
+pack build forc-sample \
+    --path ./samples/forc \
+    --buildpack ghcr.io/amp-buildpacks/forc \
     --builder paketobuildpacks/builder-jammy-base
 ```
 
@@ -38,7 +38,7 @@ docker run -u <uid>:<gid> -it <image-name>
 For example:
 
 ```shell
-docker run -u 1001:cnb -e HOME=/layers/amp-buildpacks_sway/forc-amd64/fuel -it sway-sample
+docker run -u 1001:cnb -e HOME=/layers/amp-buildpacks_forc/forc-amd64/fuel -it forc-sample
 ```
 
 ## Contributing

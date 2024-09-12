@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package sway
+package forc
 
 import (
 	"fmt"
@@ -30,9 +30,9 @@ type Detect struct {
 }
 
 func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error) {
-	found, err := d.swayProject(context.Application.Path)
+	found, err := d.forcProject(context.Application.Path)
 	if err != nil {
-		return libcnb.DetectResult{Pass: false}, fmt.Errorf("unable to detect Sway requirements\n%w", err)
+		return libcnb.DetectResult{Pass: false}, fmt.Errorf("unable to detect %s requirements\n%w", PlanEntryForc, err)
 	}
 
 	if !found {
@@ -54,7 +54,7 @@ func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error
 	}, nil
 }
 
-func (d Detect) swayProject(appDir string) (bool, error) {
+func (d Detect) forcProject(appDir string) (bool, error) {
 	filename := "Forc.toml"
 	_, err := os.Stat(filepath.Join(appDir, filename))
 	if os.IsNotExist(err) || err != nil {
