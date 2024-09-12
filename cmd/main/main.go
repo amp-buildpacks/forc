@@ -17,14 +17,14 @@ package main
 import (
 	"os"
 
-	sway "github.com/amp-buildpacks/sway/sway"
+	forc "github.com/amp-buildpacks/forc/forc"
 	"github.com/buildpacks/libcnb"
 	"github.com/paketo-buildpacks/libpak/bard"
 )
 
 func main() {
 	libcnb.Main(
-		sway.Detect{},
-		sway.Build{Logger: bard.NewLogger(os.Stdout)},
+		forc.Detect{},
+		forc.Build{Logger: bard.NewLogger(os.Stdout)},
 	)
 }

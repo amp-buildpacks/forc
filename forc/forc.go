@@ -30,26 +30,26 @@ import (
 	"github.com/paketo-buildpacks/libpak/sherpa"
 )
 
-type Sway struct {
+type Forc struct {
 	LayerContributor libpak.DependencyLayerContributor
 	configResolver   libpak.ConfigurationResolver
 	Logger           bard.Logger
 	Executor         effect.Executor
 }
 
-func NewSway(dependency libpak.BuildpackDependency, cache libpak.DependencyCache, configResolver libpak.ConfigurationResolver) Sway {
+func NewSway(dependency libpak.BuildpackDependency, cache libpak.DependencyCache, configResolver libpak.ConfigurationResolver) Forc {
 	contributor := libpak.NewDependencyLayerContributor(dependency, cache, libcnb.LayerTypes{
 		Cache:  true,
 		Launch: true,
 	})
-	return Sway{
+	return Forc{
 		LayerContributor: contributor,
 		configResolver:   configResolver,
 		Executor:         effect.NewExecutor(),
 	}
 }
 
-func (r Sway) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
+func (r Forc) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	r.LayerContributor.Logger = r.Logger
 	return r.LayerContributor.Contribute(layer, func(artifact *os.File) (libcnb.Layer, error) {
 		bin := filepath.Join(layer.Path, "bin")
@@ -107,7 +107,7 @@ func (r Sway) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	})
 }
 
-func (r Sway) Execute(command string, args []string) (*bytes.Buffer, error) {
+func (r Forc) Execute(command string, args []string) (*bytes.Buffer, error) {
 	buf := &bytes.Buffer{}
 	if err := r.Executor.Execute(effect.Execution{
 		Command: command,
@@ -120,7 +120,7 @@ func (r Sway) Execute(command string, args []string) (*bytes.Buffer, error) {
 	return buf, nil
 }
 
-func (r Sway) BuildProcessTypes(cr libpak.ConfigurationResolver, app libcnb.Application) ([]libcnb.Process, error) {
+func (r Forc) BuildProcessTypes(cr libpak.ConfigurationResolver, app libcnb.Application) ([]libcnb.Process, error) {
 	processes := []libcnb.Process{}
 
 	enableDeploy := cr.ResolveBool("BP_ENABLE_FORC_DEPLOY")
@@ -135,7 +135,7 @@ func (r Sway) BuildProcessTypes(cr libpak.ConfigurationResolver, app libcnb.Appl
 	return processes, nil
 }
 
-func (r Sway) InitializeWallet(walletDir string) (bool, error) {
+func (r Forc) InitializeWallet(walletDir string) (bool, error) {
 	r.Logger.Bodyf("Initializing deploy wallet and save to dir: %s", walletDir)
 	os.MkdirAll(walletDir, os.ModePerm)
 
@@ -153,7 +153,7 @@ func (r Sway) InitializeWallet(walletDir string) (bool, error) {
 	return true, nil
 }
 
-func (r Sway) BuildContract() error {
+func (r Forc) BuildContract() error {
 	args := []string{"build", "--release"}
 	_, err := r.Execute(PlanEntryForc, args)
 	if err != nil {
@@ -163,7 +163,7 @@ func (r Sway) BuildContract() error {
 	return nil
 }
 
-func (r Sway) Name() string {
+func (r Forc) Name() string {
 	return r.LayerContributor.LayerName()
 }
 

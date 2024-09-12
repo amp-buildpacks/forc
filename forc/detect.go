@@ -32,7 +32,7 @@ type Detect struct {
 func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error) {
 	found, err := d.swayProject(context.Application.Path)
 	if err != nil {
-		return libcnb.DetectResult{Pass: false}, fmt.Errorf("unable to detect Sway requirements\n%w", err)
+		return libcnb.DetectResult{Pass: false}, fmt.Errorf("unable to detect %s requirements\n%w", PlanEntryForc, err)
 	}
 
 	if !found {
